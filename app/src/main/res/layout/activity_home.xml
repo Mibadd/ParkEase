@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <!-- Teks Selamat Datang -->
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"

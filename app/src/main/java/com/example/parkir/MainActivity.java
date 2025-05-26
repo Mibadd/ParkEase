@@ -10,16 +10,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set layout untuk Splash Screen
         setContentView(R.layout.activity_main);
 
-        // Handler untuk menunda layar Splash selama 3 detik
+        // Handler untuk Splash Screen
         new Handler().postDelayed(() -> {
-            // Pindah ke Activity Utama (HomeActivity)
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
-            finish(); // Menutup Splash Screen agar tidak kembali saat menekan tombol Back
-        }, 3000); // 3000ms = 3 detik
+            finish(); // Menutup Splash Screen agar tidak kembali dengan tombol Back
+        }, 3000); // Durasi 3 detik
     }
 }
