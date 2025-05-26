@@ -1,27 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D1D2C">
+    android:background="@color/purple_500">
 
-    <!-- Lingkaran besar -->
-    <View
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/circle_background" />
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_parking" /> <!-- Ganti dengan logo Anda -->
 
-    <!-- Teks judul -->
-    <TextView
-        android:id="@+id/titleText"
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
-        android:text="Parkir Pintar"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="20dp"
+        android:indeterminateTint="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Parkir App © 2024"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

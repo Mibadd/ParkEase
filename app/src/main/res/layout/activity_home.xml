@@ -1,17 +1,84 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/light_gray">
 
-    <!-- Teks Selamat Datang -->
+    <!-- Header -->
     <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Selamat Datang di ParkEase!"
-        android:textColor="#000000"
+        android:text="Selamat Datang di ParkirKu"
         android:textSize="24sp"
-        android:textStyle="bold" />
-</RelativeLayout>
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Card untuk Fitur Utama -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/btnFindParking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cari Tempat Parkir"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/btnMyParking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Parkir Saya"
+                android:backgroundTint="@color/purple_700"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Admin Section (Hanya muncul jika admin) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin Menu"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/btnManageParking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kelola Parkir"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
