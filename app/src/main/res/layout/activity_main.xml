@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500">
+    android:background="#1D1D2C">
 
+    <!-- Logo aplikasi -->
     <ImageView
-        android:id="@+id/logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_parking" /> <!-- Ganti dengan logo Anda -->
+        android:id="@+id/logoImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/ic_parking_logo"
+        android:background="@drawable/circle_background" />
 
-    <ProgressBar
+    <!-- Teks judul -->
+    <TextView
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:indeterminateTint="@android:color/white" />
+        android:layout_below="@id/logoImage"
+        android:layout_marginTop="30dp"
+        android:text="ParkEase"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
+    <!-- Subtitle -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="Parkir App © 2024"
-        android:textColor="@android:color/white" />
+        android:layout_below="@id/titleText"
+        android:layout_marginTop="10dp"
+        android:text="Parkir Pintar, Hidup Mudah"
+        android:textColor="#B0B0B0"
+        android:textSize="16sp" />
+
+    <!-- Loading indicator -->
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:indeterminateTint="#5468FF" />
+
 </RelativeLayout>
