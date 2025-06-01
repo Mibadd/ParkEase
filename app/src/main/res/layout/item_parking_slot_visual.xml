@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardSlot"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    android:layout_margin="4dp">
+
+    <LinearLayout
+        android:id="@+id/layoutSlot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="4dp"
+        android:background="@color/light_blue"> <TextView
+        android:id="@+id/tvSlotNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A01"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_gray"/>
+
+        <TextView
+            android:id="@+id/tvSlotStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kosong"
+            android:textSize="10sp"
+            android:textColor="@color/medium_gray"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

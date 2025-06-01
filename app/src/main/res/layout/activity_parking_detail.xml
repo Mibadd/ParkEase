@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_gray"
+    tools:context=".ParkingDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarParkingDetail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back" /> </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvLocationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Nama Lokasi Parkir"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_gray"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Jenis Kendaraan:"
+                android:textSize="16sp"
+                android:textColor="@color/medium_gray"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgVehicleType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <RadioButton
+                    android:id="@+id/rbCar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobil 🚗"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/rbMotorcycle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Motor 🛵"
+                    android:layout_marginStart="16dp"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Lantai/Area:"
+                android:textSize="16sp"
+                android:textColor="@color/medium_gray"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerParkingArea"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:spinnerMode="dropdown"/>
+
+            <TextView
+                android:id="@+id/tvSelectedAreaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Info Ketersediaan Area"
+                android:textSize="14sp"
+                android:textColor="@color/dark_gray"
+                android:layout_marginBottom="12dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvParkingSlots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_parking_slot_visual"
+                tools:itemCount="12"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:spanCount="4" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnConfirmParking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PILIH SLOT DAHULU"
+        android:backgroundTint="@color/purple_700"
+        android:textColor="@color/white"
+        android:layout_margin="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textSize="16sp"
+        android:enabled="false"/>
+
+</LinearLayout>

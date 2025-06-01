@@ -60,7 +60,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomeActivity.this, "Membuka Cari Parkir", Toast.LENGTH_SHORT).show();
-                // TODO: Implementasi untuk membuka Activity Cari Parkir
+                Intent intent = new Intent(HomeActivity.this, FindParkingActivity.class);
+                startActivity(intent);
             }
         });
 

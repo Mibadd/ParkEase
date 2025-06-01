@@ -24,20 +24,20 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false">
-        </activity>
+        <activity android:name=".LoginActivity" android:exported="false" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".HomeActivity" android:exported="false" />
 
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false">
-        </activity>
+            android:name=".FindParkingActivity"
+            android:exported="false"
+            android:label="Cari Tempat Parkir" />
 
         <activity
-            android:name=".HomeActivity"
-            android:exported="false">
-        </activity>
+            android:name=".ParkingDetailActivity"
+            android:exported="false"
+            android:label="Detail Slot Parkir"
+            android:theme="@style/Theme.Parkir"/>
 
     </application>
 </manifest>
