@@ -69,7 +69,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomeActivity.this, "Membuka Riwayat Parkir", Toast.LENGTH_SHORT).show();
-                // TODO: Implementasi untuk membuka Activity Riwayat
+                Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -77,7 +78,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomeActivity.this, "Membuka Profile", Toast.LENGTH_SHORT).show();
-                // TODO: Implementasi untuk membuka Activity Profile
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,9 +87,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomeActivity.this, "Membuka Pengaturan", Toast.LENGTH_SHORT).show();
-                // TODO: Implementasi untuk membuka Activity Pengaturan
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
+
 
         // --- Listener untuk Tombol Logout ---
         logoutButton.setOnClickListener(v -> {
