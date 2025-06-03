@@ -1,0 +1,64 @@
+[
+  {
+    "name": "Paris Van Java Mall",
+    "address": "Jl. Sukajadi No.131-139, Cipedes, Kec. Sukajadi, Kota Bandung, Jawa Barat 40162",
+    "coordinates": {
+      "latitude": -6.8824,
+      "longitude": 107.5918
+    },
+    "last_updated": {
+      "seconds": 1749822000,
+      "nanoseconds": 0
+    },
+    "parking_areas": [
+      {
+        "area_name": "Gedung Parkir Mobil",
+        "vehicle_type": "car",
+        "total_spots": 350,
+        "price_per_hour": 8000,
+        "floor_level": 3,
+        "slots": [
+          {
+            "slot_number": "C-01",
+            "status": "empty",
+            "occupied_by_user_id": ""
+          },
+          {
+            "slot_number": "C-02",
+            "status": "occupied",
+            "occupied_by_user_id": "xYzabc12345userTOKEN6789"
+          },
+          {
+            "slot_number": "C-03",
+            "status": "empty",
+            "occupied_by_user_id": ""
+          }
+        ]
+      },
+      {
+        "area_name": "Basement Motor",
+        "vehicle_type": "motorcycle",
+        "total_spots": 500,
+        "price_per_hour": 3000,
+        "floor_level": -1,
+        "slots": [
+          {
+            "slot_number": "MB-101",
+            "status": "occupied",
+            "occupied_by_user_id": "aBCdef98765userTOKEN5432"
+          },
+          {
+            "slot_number": "MB-102",
+            "status": "occupied",
+            "occupied_by_user_id": "fGHiJk45678userTOKEN1098"
+          },
+          {
+            "slot_number": "MB-103",
+            "status": "empty",
+            "occupied_by_user_id": ""
+          }
+        ]
+      }
+    ]
+  }
+]

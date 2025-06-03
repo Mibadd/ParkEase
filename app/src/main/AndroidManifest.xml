@@ -27,6 +27,9 @@
         <activity android:name=".LoginActivity" android:exported="false" />
         <activity android:name=".RegisterActivity" android:exported="false" />
         <activity android:name=".HomeActivity" android:exported="false" />
+        <activity android:name=".HistoryActivity"/>
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".SettingsActivity"/>
 
         <activity
             android:name=".FindParkingActivity"
@@ -39,5 +42,12 @@
             android:label="Detail Slot Parkir"
             android:theme="@style/Theme.Parkir"/>
 
+        <activity
+            android:name=".SelectSlotActivity"
+            android:exported="false"
+            android:label="Pilih Slot Parkir" />
+        <activity
+            android:name=".BookingSuccessActivity"
+            android:exported="false" />
     </application>
 </manifest>

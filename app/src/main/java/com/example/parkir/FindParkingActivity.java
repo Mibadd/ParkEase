@@ -1,31 +1,34 @@
 package com.example.parkir;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.parkir.adapter.ParkingAdapter;
 import com.example.parkir.model.ParkingLocation;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
+import java.util.Locale;
 
-public class FindParkingActivity extends AppCompatActivity {
+public class FindParkingActivity extends AppCompatActivity implements ParkingAdapter.OnItemClickListener {
 
     private static final String TAG = "FindParkingActivity";
 
-    private TextInputEditText locationInput;
-    private Button searchButton;
+    private EditText etSearch;
+    private ImageView ivBack;
     private RecyclerView parkingRecyclerView;
     private ParkingAdapter parkingAdapter;
-    private List<ParkingLocation> parkingLocationList;
+    private List<ParkingLocation> fullParkingList; // Untuk menyimpan data asli
     private FirebaseFirestore db;
 
     @Override
@@ -33,64 +36,73 @@ public class FindParkingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_parking);
 
-        locationInput = findViewById(R.id.locationInput);
-        searchButton = findViewById(R.id.searchButton);
+        etSearch = findViewById(R.id.etSearch);
+        ivBack = findViewById(R.id.ivBack);
         parkingRecyclerView = findViewById(R.id.parkingRecyclerView);
 
         db = FirebaseFirestore.getInstance();
-        parkingLocationList = new ArrayList<>();
+        fullParkingList = new ArrayList<>();
 
         setupRecyclerView();
+        setupSearchListener();
 
-        searchButton.setOnClickListener(v -> {
-            String queryText = locationInput.getText().toString().trim();
-            // Implement search logic if needed, or filter client-side for simplicity.
-            // For now, clicking search reloads all.
-            loadParkingLocations(queryText);
-        });
+        ivBack.setOnClickListener(v -> onBackPressed());
 
-        // Initial load
-        loadParkingLocations(null);
+        loadAllParkingLocations();
     }
 
     private void setupRecyclerView() {
-        parkingAdapter = new ParkingAdapter(this, parkingLocationList, location -> {
-            // Toast.makeText(FindParkingActivity.this, "Navigasi ke " + location.getName(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(FindParkingActivity.this, ParkingDetailActivity.class);
-            intent.putExtra("locationId", location.getId()); // Kirim ID lokasi
-            intent.putExtra("locationName", location.getName()); // Kirim nama lokasi untuk ditampilkan
-            startActivity(intent);
-        });
+        // Kirim list kosong pada awalnya, akan diisi nanti
+        parkingAdapter = new ParkingAdapter(new ArrayList<>(), this);
         parkingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         parkingRecyclerView.setAdapter(parkingAdapter);
     }
 
-    private void loadParkingLocations(String searchQuery) {
-        Query query = db.collection("parking_locations");
+    @Override
+    public void onItemClick(ParkingLocation location) {
+        Intent intent = new Intent(FindParkingActivity.this, ParkingDetailActivity.class);
+        intent.putExtra("DOCUMENT_ID", location.getDocumentId());
+        startActivity(intent);
+    }
 
-        // Basic search: If you want to implement actual text search,
-        // Firestore has limited capabilities. Consider a third-party service like Algolia
-        // or structure your data for simpler "startsWith" queries if applicable.
-        // For now, this example loads all and you could filter client-side or adjust query.
-        // if (searchQuery != null && !searchQuery.isEmpty()) {
-        //     query = query.whereGreaterThanOrEqualTo("name", searchQuery)
-        //                  .whereLessThanOrEqualTo("name", searchQuery + "\uf8ff");
-        // }
+    private void setupSearchListener() {
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        query.orderBy("name") // Optional: order by name
-                .get()
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void filter(String text) {
+        List<ParkingLocation> filteredList = new ArrayList<>();
+        for (ParkingLocation item : fullParkingList) {
+            // Filter berdasarkan nama lokasi (tidak case-sensitive)
+            if (item.getName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+                filteredList.add(item);
+            }
+        }
+        parkingAdapter.updateData(filteredList);
+    }
+
+    private void loadAllParkingLocations() {
+        db.collection("parking_locations").orderBy("name").get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        List<ParkingLocation> tempList = new ArrayList<>();
+                        fullParkingList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             ParkingLocation location = document.toObject(ParkingLocation.class);
-                            location.setId(document.getId()); // Important: Store document ID
-                            tempList.add(location);
+                            location.setDocumentId(document.getId());
+                            fullParkingList.add(location);
                         }
-                        parkingAdapter.updateData(tempList); // Use adapter's update method
-                        if (tempList.isEmpty()) {
-                            Toast.makeText(FindParkingActivity.this, "Tidak ada lokasi parkir ditemukan.", Toast.LENGTH_SHORT).show();
-                        }
+                        // Tampilkan semua data pada awalnya
+                        parkingAdapter.updateData(new ArrayList<>(fullParkingList));
                     } else {
                         Log.e(TAG, "Error getting parking locations: ", task.getException());
                         Toast.makeText(FindParkingActivity.this, "Gagal memuat data parkir.", Toast.LENGTH_SHORT).show();
