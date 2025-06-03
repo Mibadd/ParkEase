@@ -42,5 +42,12 @@
             android:label="Detail Slot Parkir"
             android:theme="@style/Theme.Parkir"/>
 
+        <activity
+            android:name=".SelectSlotActivity"
+            android:exported="false"
+            android:label="Pilih Slot Parkir" />
+        <activity
+            android:name=".BookingSuccessActivity"
+            android:exported="false" />
     </application>
 </manifest>
