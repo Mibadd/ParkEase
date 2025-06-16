@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -48,14 +51,21 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.ai)
 
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.cardview:cardview:1.0.0")
 
-
+    // Firebase BoM (Bill of Materials) - Mengelola versi library Firebase secara otomatis
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+
+    // Dependensi untuk Firebase Authentication, Firestore, dan Storage
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore") // <<< Add this for Firestore
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Dependensi untuk memuat gambar dari URL (Glide adalah pilihan populer)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }
