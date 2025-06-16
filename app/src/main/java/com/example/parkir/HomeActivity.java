@@ -1,109 +1,105 @@
+package com.example.parkir;
 
-package com.example.parkir; // Sesuaikan dengan nama package Anda
-
-
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.parkir.databinding.ActivityHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private ActivityHomeBinding binding;
     private FirebaseAuth mAuth;
-    private TextView welcomeText;
-
-    // CardViews untuk menu utama
-    private CardView findParkingCard;
-    private CardView historyCard;
-    private CardView profileCard;
-    private CardView settingsCard;
-    private Button logoutButton; // Deklarasikan tombol logout
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home); // Menggunakan activity_home.xml
+        // Menggunakan View Binding untuk mengakses komponen layout
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        // Inisialisasi Views dari XML (sesuai ID di activity_home.xml)
-        welcomeText = findViewById(R.id.welcomeText); // ID di XML adalah welcomeText
-
-        findParkingCard = findViewById(R.id.findParkingCard);
-        historyCard = findViewById(R.id.historyCard);
-        profileCard = findViewById(R.id.profileCard);
-        settingsCard = findViewById(R.id.settingsCard);
-        logoutButton = findViewById(R.id.logoutButton); // Inisialisasi tombol logout
-
-        // Cek status login saat Activity dibuat
+        // Memeriksa apakah user sudah login
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            // Jika tidak ada user yang login, arahkan kembali ke LoginActivity
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish(); // Tutup HomeActivity
-        } else {
-            // Jika ada user, tampilkan pesan selamat datang dengan email pengguna
-            welcomeText.setText("Selamat Datang, " + currentUser.getEmail() + "!\nTemukan parkir terdekat");
+            // Jika belum, kembali ke LoginActivity
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
         }
 
-        // --- Listener untuk CardViews ---
-        findParkingCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Membuka Cari Parkir", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, FindParkingActivity.class);
-                startActivity(intent);
-            }
+        // Mengatur nama pengguna di header
+        setupWelcomeMessage(currentUser);
+
+
+        // --- INI BAGIAN YANG DIPERBAIKI ---
+        // Menambahkan OnClickListener ke komponen dengan ID baru
+
+        // Listener untuk ikon profil di pojok kanan atas
+        binding.ivProfileIcon.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
         });
 
-        historyCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Membuka Riwayat Parkir", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
+        // Listener untuk kartu "Cari Parkir"
+        binding.findParkingCard.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, FindParkingActivity.class));
         });
 
-        profileCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Membuka Profile", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
+        // Listener untuk kartu "Riwayat"
+        binding.historyCard.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, HistoryActivity.class));
         });
 
-        settingsCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Membuka Pengaturan", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
+        // Listener untuk kartu "Profil"
+        binding.profileCard.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
         });
 
+        // Listener untuk kartu "Pengaturan"
+        binding.settingsCard.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+        });
 
-        // --- Listener untuk Tombol Logout ---
-        logoutButton.setOnClickListener(v -> {
-            mAuth.signOut(); // Logout dari Firebase
-            Toast.makeText(HomeActivity.this, "Anda telah logout.", Toast.LENGTH_SHORT).show();
-            // Arahkan kembali ke LoginActivity setelah logout
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish(); // Tutup HomeActivity
+        // Listener untuk tombol Logout
+
+
+        // Listener untuk search bar (opsional, jika ingin ada aksi saat di-klik)
+        binding.searchCard.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, FindParkingActivity.class));
         });
     }
+
+    private void setupWelcomeMessage(FirebaseUser user) {
+        // Ambil nama pengguna dari Firestore
+        db.collection("users").document(user.getUid()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        if (name != null && !name.isEmpty()) {
+                            binding.welcomeText.setText("Hai, " + name + "!");
+                        } else {
+                            binding.welcomeText.setText("Selamat Datang!");
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    binding.welcomeText.setText("Selamat Datang!");
+                });
+    }
+
+
 }

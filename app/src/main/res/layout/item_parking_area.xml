@@ -7,7 +7,9 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
     app:cardBackgroundColor="#28303E"
-    android:layout_marginBottom="12dp">
+    android:layout_marginBottom="12dp"
+    android:id="@+id/btnSelectSlot">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivArrow"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="98 Tersedia" />
+            tools:text="Tersedia" />
 
         <ImageView
             android:id="@+id/ivArrow"

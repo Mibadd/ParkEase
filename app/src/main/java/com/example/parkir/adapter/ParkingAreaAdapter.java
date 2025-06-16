@@ -29,6 +29,7 @@ public class ParkingAreaAdapter extends RecyclerView.Adapter<ParkingAreaAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         ParkingArea area = parkingAreaList.get(position);
         holder.tvAreaName.setText(area.getArea_name());
         holder.tvFloorLevel.setText("Lantai " + area.getFloor_level());

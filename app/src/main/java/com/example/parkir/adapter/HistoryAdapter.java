@@ -1,6 +1,5 @@
 package com.example.parkir.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkir.R;
-import com.example.parkir.model.Booking; // Buat model ini
+import com.example.parkir.model.Booking;
 import com.google.firebase.Timestamp;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -34,7 +34,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     @NonNull
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false); // Buat layout ini
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
         return new HistoryViewHolder(view);
     }
 
@@ -50,7 +50,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     class HistoryViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLocation, tvSlot, tvTime;
+        // Deklarasikan semua TextView
+        TextView tvLocation, tvSlot, tvTime, tvDuration, tvPrice, tvPaymentMethod;
         Button btnEndParking;
 
         HistoryViewHolder(@NonNull View itemView) {
@@ -58,20 +59,39 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             tvLocation = itemView.findViewById(R.id.tvHistoryLocation);
             tvSlot = itemView.findViewById(R.id.tvHistorySlot);
             tvTime = itemView.findViewById(R.id.tvHistoryTime);
+            tvDuration = itemView.findViewById(R.id.tvHistoryDuration);
+            tvPrice = itemView.findViewById(R.id.tvHistoryPrice);
+            // Inisialisasi TextView untuk metode pembayaran
+            tvPaymentMethod = itemView.findViewById(R.id.tvHistoryPaymentMethod);
             btnEndParking = itemView.findViewById(R.id.btnEndParking);
         }
 
         void bind(final Booking booking) {
-            tvLocation.setText(booking.getLocationName());
-            tvSlot.setText("Slot " + booking.getAreaName() + " - " + booking.getSlotNumber());
+            tvLocation.setText(booking.getLocationName()); //
+            tvSlot.setText("Slot " + booking.getAreaName() + " - " + booking.getSlotNumber()); //
 
-            Timestamp bookingTimestamp = booking.getBookingTime();
+            Timestamp bookingTimestamp = booking.getBookingTime(); //
             if (bookingTimestamp != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
-                tvTime.setText("Waktu: " + sdf.format(bookingTimestamp.toDate()));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault()); //
+                tvTime.setText("Waktu: " + sdf.format(bookingTimestamp.toDate())); //
             }
 
-            btnEndParking.setOnClickListener(v -> listener.onEndParkingClick(booking));
+            // Atur teks untuk durasi
+            tvDuration.setText("Durasi: " + booking.getDurationInHours() + " jam");
+
+            // Format harga ke dalam format mata uang Rupiah
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+            tvPrice.setText("Harga: " + currencyFormat.format(booking.getTotalPrice()));
+
+            // Atur teks untuk metode pembayaran, tambahkan pengecekan jika null
+            if (booking.getPaymentMethod() != null && !booking.getPaymentMethod().isEmpty()) {
+                tvPaymentMethod.setText("Metode: " + booking.getPaymentMethod());
+                tvPaymentMethod.setVisibility(View.VISIBLE);
+            } else {
+                tvPaymentMethod.setVisibility(View.GONE);
+            }
+
+            btnEndParking.setOnClickListener(v -> listener.onEndParkingClick(booking)); //
         }
     }
 }

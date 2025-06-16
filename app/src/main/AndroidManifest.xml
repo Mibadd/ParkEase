@@ -50,5 +50,10 @@
         <activity
             android:name=".BookingSuccessActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+
     </application>
 </manifest>

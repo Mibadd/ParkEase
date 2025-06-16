@@ -6,32 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F6F9"
+    android:background="@color/background_dark"
     tools:context=".FindParkingActivity">
 
+    <!-- AppBar/Toolbar Section -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:elevation="4dp">
+        android:background="@color/background_dark"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Search bar content -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_container_rounded"
+                android:backgroundTint="@color/card_background_dark"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:layout_marginEnd="16dp">
 
                 <ImageView
                     android:id="@+id/ivBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_back"
-                    app:tint="#1D1D2C" />
+                    app:tint="@color/text_secondary_dark" />
 
                 <EditText
                     android:id="@+id/etSearch"
@@ -40,6 +47,8 @@
                     android:layout_weight="1"
                     android:layout_marginStart="16dp"
                     android:hint="Cari nama mall atau gedung"
+                    android:textColor="@color/text_primary_dark"
+                    android:textColorHint="@color/text_secondary_dark"
                     android:background="@android:color/transparent"
                     android:inputType="text"
                     android:imeOptions="actionSearch"/>
@@ -47,23 +56,25 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Title for Recommendation -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rekomendasi Tempat"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#1D1D2C"
+        android:textColor="@color/text_primary_dark"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"/>
 
+    <!-- List of Parking Locations -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parkingRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="8dp"
         android:clipToPadding="false"
         tools:listitem="@layout/item_recommendation"/>
 

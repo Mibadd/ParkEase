@@ -6,53 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5"
+    android:background="@color/background_dark"
     tools:context=".EditProfileActivity">
 
+    <!-- AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/background_dark"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Edit Profil"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            app:titleTextColor="@color/text_primary_dark"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/text_primary_dark" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Form Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Name Input Field -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama Lengkap">
+            android:textColorHint="@color/text_secondary_dark"
+            app:boxStrokeColor="@color/button_blue"
+            app:hintTextColor="@color/button_blue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Nama Lengkap"
+                android:textColor="@color/text_primary_dark"
                 android:inputType="textPersonName|textCapWords" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Email Input Field -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Email">
+            android:textColorHint="@color/text_secondary_dark"
+            app:boxStrokeColor="@color/button_blue"
+            app:hintTextColor="@color/button_blue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Email"
+                android:textColor="@color/text_secondary_dark"
                 android:focusable="false"
                 android:clickable="false"
                 android:longClickable="false"
@@ -60,12 +76,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Save Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_profile"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
             android:text="Simpan Perubahan"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/button_blue"
             android:textSize="16sp"/>
 
     </LinearLayout>

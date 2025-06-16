@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/background_dark"
     tools:context=".ProfileActivity">
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back"
-            app:tint="?attr/colorOnSurface"
+            app:tint="@color/text_primary_dark"
             android:padding="8dp"
             android:layout_gravity="start"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -35,7 +35,7 @@
             android:layout_marginTop="16dp"
             android:src="@mipmap/ic_launcher_round"
             app:civ_border_width="2dp"
-            app:civ_border_color="#CCCCCC"/>
+            app:civ_border_color="@color/button_blue"/>
 
         <!-- Nama Pengguna -->
         <TextView
@@ -43,10 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Ibadurrahman"
+            tools:text="Ibadurrahman"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"/>
+            android:textColor="@color/text_primary_dark"/>
 
         <!-- Email Pengguna -->
         <TextView
@@ -54,9 +54,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="ibadurrahman@example.com"
+            tools:text="ibadurrahman@example.com"
             android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"/>
+            android:textColor="@color/text_secondary_dark"/>
 
         <!-- Tombol Edit Profil -->
         <com.google.android.material.button.MaterialButton
@@ -65,7 +65,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Edit Profil"
+            android:backgroundTint="@color/button_blue"
+            android:textColor="@color/white"
             app:icon="@drawable/ic_edit"
+            app:iconTint="@color/white"
             app:iconGravity="textStart"/>
 
         <!-- Menu Opsi -->
@@ -73,8 +76,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            app:cardBackgroundColor="@color/card_background_dark"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,7 +102,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_settings"
-                        app:tint="#5468FF"/>
+                        app:tint="@color/button_blue"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -107,13 +111,13 @@
                         android:layout_marginStart="16dp"
                         android:text="Pengaturan"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface"/>
+                        android:textColor="@color/text_primary_dark"/>
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        app:tint="#CCCCCC"/>
+                        app:tint="@color/text_secondary_dark"/>
 
                 </LinearLayout>
 
@@ -121,7 +125,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E0E0E0"
+                    android:background="@color/background_dark"
                     android:layout_marginHorizontal="16dp"/>
 
                 <!-- Opsi Logout -->
@@ -140,7 +144,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_logout"
-                        app:tint="#FF6B6B"/>
+                        app:tint="@color/accent_red"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -149,7 +153,7 @@
                         android:layout_marginStart="16dp"
                         android:text="Logout"
                         android:textSize="16sp"
-                        android:textColor="#FF6B6B"
+                        android:textColor="@color/accent_red"
                         android:textStyle="bold"/>
 
                 </LinearLayout>

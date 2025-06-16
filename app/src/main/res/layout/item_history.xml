@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="#28303E"
+    app:cardBackgroundColor="@color/card_background_dark"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bandung Electronic Center"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary_dark"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -27,26 +27,50 @@
             android:id="@+id/tvHistorySlot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Slot P1 Mobil - A5"
-            android:textColor="#E0E0E0"
-            android:layout_marginTop="4dp"/>
+            android:textColor="@color/text_secondary_dark" />
 
         <TextView
             android:id="@+id/tvHistoryTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Waktu: 16 Jun 2025, 15:00"
-            android:textColor="#B0B0B0"
-            android:layout_marginTop="8dp"/>
+            android:textColor="@color/text_secondary_dark" />
+
+        <TextView
+            android:id="@+id/tvHistoryDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Durasi: 1 jam"
+            android:textColor="@color/text_secondary_dark" />
+
+        <TextView
+            android:id="@+id/tvHistoryPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Harga: Rp5.000"
+            android:textColor="@color/text_secondary_dark" />
+
+        <TextView
+            android:id="@+id/tvHistoryPaymentMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Metode: QRIS"
+            android:textColor="@color/text_secondary_dark" />
 
         <Button
             android:id="@+id/btnEndParking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/accent_red"
             android:text="Selesaikan Parkir"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/red"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

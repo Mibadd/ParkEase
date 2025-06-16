@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Parkir</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="parking_area">Parking Area</string>
+    <string name="date_time">Date &amp; Time</string>
+    <string name="parking_slot">Parking Slot</string>
+    <string name="price_details">Booking Details</string>
+    <string name="duration">Duration</string>
+    <string name="hours">Hours</string>
+    <string name="price">Price</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="select_payment">Select Payment</string>
+    <string name="total_price">Total Price</string>
+    <string name="pay_now">Booking Now</string>
+    <string name="back_button">Back Button</string>
 </resources>

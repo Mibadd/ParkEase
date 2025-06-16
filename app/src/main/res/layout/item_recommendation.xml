@@ -4,24 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/card_background_dark"
     app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
-    android:layout_marginBottom="12dp">
+    app:cardElevation="0dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="16dp"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/ivLocationImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_parking_logo"
-            app:tint="@color/purple_500"/>
+            android:src="@drawable/ic_location"
+            app:tint="@color/button_blue"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -34,7 +36,7 @@
                 android:id="@+id/tvLocationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#1D1D2C"
+                android:textColor="@color/text_primary_dark"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="Bandung Electronic Center" />
@@ -46,7 +48,7 @@
                 android:layout_marginTop="4dp"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary_dark"
                 tools:text="Jl. Purnawarman 13-15, Babakan Ciamis, Sumur Bandung" />
 
         </LinearLayout>
