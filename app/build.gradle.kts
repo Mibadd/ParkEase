@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -59,4 +63,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore") // <<< Add this for Firestore
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.google.code.gson:gson:2.9.0")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
