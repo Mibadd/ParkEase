@@ -67,6 +67,7 @@ public class ParkingDetailActivity extends AppCompatActivity {
 
         loadParkingDetails();
 
+
         btnSelectSlot.setOnClickListener(v -> {
             Intent intent = new Intent(ParkingDetailActivity.this, SelectSlotActivity.class);
             intent.putExtra("documentId", documentId);
@@ -122,6 +123,17 @@ public class ParkingDetailActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(name);
         tvLocationName.setText(name);
         tvLocationAddress.setText(address);
+
+        // Cek documentId untuk menentukan gambar mana yang akan dimuat
+        if ("bec".equalsIgnoreCase(documentId)) {
+            ivLocationImage.setImageResource(R.drawable.bec); // Gunakan gambar bec
+        } else if ("pvj".equalsIgnoreCase(documentId)) {
+            ivLocationImage.setImageResource(R.drawable.pvj); // Gunakan gambar pvj
+        } else {
+            // Jika ada lokasi lain, gunakan gambar default
+            ivLocationImage.setImageResource(R.drawable.ic_parking_logo);
+        }
+
 
         List<Map<String, Object>> areasData = (List<Map<String, Object>>) doc.get("parking_areas");
         if (areasData != null) {

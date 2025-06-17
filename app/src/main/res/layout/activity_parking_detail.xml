@@ -28,11 +28,6 @@
                 android:src="@drawable/ic_parking_logo"
                 app:layout_collapseMode="parallax" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/bec"/>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

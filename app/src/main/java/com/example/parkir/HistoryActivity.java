@@ -1,5 +1,6 @@
 package com.example.parkir;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +43,17 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // --- Fungsionalitas Tombol Kembali ---
+// --- Fungsionalitas Tombol Kembali ---
         binding.ivBack.setOnClickListener(v -> {
-            onBackPressed();
+            // Membuat Intent untuk secara spesifik membuka HomeActivity
+            Intent intent = new Intent(HistoryActivity.this, HomeActivity.class);
+
+            // Menambahkan flag untuk membersihkan semua activity di atas HomeActivity
+            // Ini mencegah penumpukan activity yang tidak perlu
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            startActivity(intent);
+            finish(); // Menutup HistoryActivity saat ini
         });
 
         setupRecyclerView();
